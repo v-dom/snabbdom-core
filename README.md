@@ -4,7 +4,7 @@ snabdom core studies
 ## Clone the repo & install
 ```
 git clone https://github.com/v-dom/snabbdom-core.git
-cd ./javascript-studies
+cd ./snabbdom-core
 npm install
 ```
 ## Usage
