@@ -7,8 +7,9 @@ var h = require('snabbdom/h');
 module.exports = {
 
     patch: snabbdom.init([
-         require('snabbdom/modules/class'), // makes it easy to toggle classes,
-      ]),
+        require('snabbdom/modules/class'), // makes it easy to toggle classes,
+        require('snabbdom/modules/props') // for setting properties on DOM elements
+    ]),
 
     H: h('div.hello-snabbdom', {
         style: { color: '#000' }
@@ -78,6 +79,13 @@ module.exports = {
             var newVnode = h('a.btn', {
                 class: { active: active, selected: !active }
             }, 'Toggle');
-            return newVnode;        }
+
+            return newVnode;
+        },
+
+        propsModule: function(props) {
+            // Allows you to set properties on DOM elements.
+            return h('img', { props: { src: props.a, alt: props.b } });
+        }
     }
 };

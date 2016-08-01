@@ -13,7 +13,8 @@ before('description: snabdom core', function(t) {
         window.document.querySelector('body').innerHTML = `<div id="container">
                                                               <div id="placeholder"></div>
                                                               <div id="with-hooks"></div>
-                                                              <div id="modules"></div>
+                                                              <div id="module-class"></div>
+                                                              <div id="module-props"></div>
                                                            </div>`;
         t.end();
     });
@@ -79,7 +80,7 @@ test('Hooks', function(t) {
 });
 
 test('classModule', function(t) {
-    var vnode = document.querySelector('#modules');
+    var vnode = document.querySelector('#module-class');
     var patch = snabbdom.patch;
     var actual, expect;
 
@@ -93,6 +94,19 @@ test('classModule', function(t) {
     actual = vnode.elm.getAttribute('class');
     expect = 'btn selected';
     t.equal(actual, expect, 'is selected');
+
+    t.end();
+});
+
+test('propsModule', function(t) {
+    var vnode = document.querySelector('#module-props');
+    var patch = snabbdom.patch;
+
+    vnode = patch(vnode, snabbdom.modules.propsModule({ a: 'a', b: 'b' }));
+
+    var actual = vnode.elm.getAttribute('src'),
+    expect = 'a';
+    t.equal(actual, expect, 'atribute src is defined');
 
     t.end();
 });
