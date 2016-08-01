@@ -106,7 +106,9 @@ test('propsModule', function(t) {
 
     var actual = vnode.elm.getAttribute('src'),
     expect = 'a';
-    t.equal(actual, expect, 'atribute src is defined');
+    t.equal(actual, expect, 'prop src is defined');
+
+     window.document.querySelector('body').innerHTML
 
     t.end();
 });
