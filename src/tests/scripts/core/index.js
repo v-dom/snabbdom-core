@@ -13,6 +13,7 @@ before('description: snabdom core', function(t) {
         window.document.querySelector('body').innerHTML = `<div id="container">
                                                               <div id="placeholder"></div>
                                                               <div id="with-hooks"></div>
+                                                              <div id="modules"></div>
                                                            </div>`;
         t.end();
     });
@@ -73,7 +74,25 @@ test('Hooks', function(t) {
         actual = document.querySelector('.hello-snabbdom').innerHTML;
         expect = 'hello again';
         t.equal(actual, expect, 'now element was removed');
-    }, 1002);
+        t.end();
+    }, 2);
+});
+
+test('classModule', function(t) {
+    var vnode = document.querySelector('#modules');
+    var patch = snabbdom.patch;
+    var actual, expect;
+
+    vnode = patch(vnode, snabbdom.modules.classModule(true));
+
+    actual = vnode.elm.getAttribute('class');
+    expect = 'btn active';
+    t.equal(actual, expect, 'is active');
+
+    vnode = patch(vnode, snabbdom.modules.classModule(false))
+    actual = vnode.elm.getAttribute('class');
+    expect = 'btn selected';
+    t.equal(actual, expect, 'is selected');
 
     t.end();
 });

@@ -6,7 +6,9 @@ var h = require('snabbdom/h');
 
 module.exports = {
 
-    patch: snabbdom.init([]),
+    patch: snabbdom.init([
+         require('snabbdom/modules/class'), // makes it easy to toggle classes,
+      ]),
 
     H: h('div.hello-snabbdom', {
         style: { color: '#000' }
@@ -57,12 +59,25 @@ module.exports = {
                     setTimeout(function() {
                         console.log('element was removed');
                         return callback();
-                    }, 1000);
+                    }, 1);
                 }
 
             }
         }, 'with hooks');
         var patch = snabbdom.init([]);
         return patch(vnode, newVnode);
+    },
+
+    modules: {
+        classModule: function(active) {
+            // The class module provides an easy way to dynamically toggle
+            // classes on elements. It expects an object in the class data property.
+            // The object should map class names to booleans that indicates
+            // whether or not the class should stay or go on the vnode.
+            // var r = 1;
+            var newVnode = h('a.btn', {
+                class: { active: active, selected: !active }
+            }, 'Toggle');
+            return newVnode;        }
     }
 };
