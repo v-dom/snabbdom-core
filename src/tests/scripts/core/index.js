@@ -90,7 +90,7 @@ test('classModule', function(t) {
     expect = 'btn active';
     t.equal(actual, expect, 'is active');
 
-    vnode = patch(vnode, snabbdom.modules.classModule(false))
+    vnode = patch(vnode, snabbdom.modules.classModule(false));
     actual = vnode.elm.getAttribute('class');
     expect = 'btn selected';
     t.equal(actual, expect, 'is selected');
@@ -105,10 +105,7 @@ test('propsModule', function(t) {
     vnode = patch(vnode, snabbdom.modules.propsModule({ a: 'a', b: 'b' }));
 
     var actual = vnode.elm.getAttribute('src'),
-    expect = 'a';
+        expect = 'a';
     t.equal(actual, expect, 'prop src is defined');
-
-     window.document.querySelector('body').innerHTML
-
     t.end();
 });
