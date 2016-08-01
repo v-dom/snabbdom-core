@@ -11,8 +11,9 @@ npm install
 ```
 cd ./snabbdom-core
 npm run dev
+
 ```
-`
+
 
 ## links
 [sanbdom](https://github.com/paldepind/snabbdom)
