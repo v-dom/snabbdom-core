@@ -1,11 +1,17 @@
 # snabdom
-snabdom studies
+snabdom core studies
 
-[examples](http://suxxus.github.io/studies/snabdom-examples.html)
+## Clone the repo & install
+```
+git clone https://github.com/v-dom/snabbdom-core.git
+cd ./javascript-studies
+npm install
+```
+## Usage
+cd ./snabbdom-core
+
+```
+npm run `dev`
 
 ## links
 [sanbdom](https://github.com/paldepind/snabbdom)
-
-[React-less Virtual DOM with Snabbdom](https://medium.com/@yelouafi/react-less-virtual-dom-with-snabbdom-functions-everywhere-53b672cb2fe3#.6jgz2d7wl)
-
-[Elm Architecture & Side Effects: example with Snabbdom/JSX](https://medium.com/@yelouafi/elm-architecture-side-effect-examples-with-snabbdom-and-jsx-3732219d9995#.wumhvfgng)
