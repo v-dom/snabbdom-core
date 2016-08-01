@@ -8,10 +8,11 @@ cd ./javascript-studies
 npm install
 ```
 ## Usage
-cd ./snabbdom-core
-
 ```
-npm run `dev`
+cd ./snabbdom-core
+npm run dev
+```
+`
 
 ## links
 [sanbdom](https://github.com/paldepind/snabbdom)
