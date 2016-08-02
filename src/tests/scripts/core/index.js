@@ -2,8 +2,8 @@
 
 var test = require('tape');
 var benv = require('benv');
+var sinon = require('sinon');
 var snabbdom = require('scripts/core');
-
 
 var before = test;
 
@@ -18,6 +18,7 @@ before('description: snabdom core', function(t) {
                                                               <div id="module-attrs"></div>
                                                               <div id="module-styles-style"></div>
                                                               <div id="module-styles-delayed-props"></div>
+                                                              <div id="evt-listeners"></div>
                                                            </div>`;
         t.end();
     });
@@ -142,5 +143,26 @@ test('styleModule: delayed properties', function(t) {
         t.equal(actual, expect, 'style opacity with delay');
         t.end();
     }, 500);
+
+});
+
+test('eventListeners', function(t) {
+
+    var vnode = document.querySelector('#evt-listeners');
+    var patch = snabbdom.patch;
+    var callback = sinon.spy();
+
+    vnode = patch(vnode, snabbdom.evtlistener(callback));
+
+    var buttonValue = vnode.children[0].data.on.click[1];
+
+    // simulate click
+    vnode.children[0].data.on.click[0](buttonValue);
+
+    var actual = callback.calledWith(1),
+        expect = true;
+    t.equal(actual, expect, 'evt listener was called with value === 1');
+
+    t.end();
 
 });
