@@ -19,6 +19,7 @@ before('description: snabdom core', function(t) {
                                                               <div id="module-styles-style"></div>
                                                               <div id="module-styles-delayed-props"></div>
                                                               <div id="evt-listeners"></div>
+                                                              <div id="vnode-properties"></div>
                                                            </div>`;
         t.end();
     });
@@ -143,7 +144,6 @@ test('styleModule: delayed properties', function(t) {
         t.equal(actual, expect, 'style opacity with delay');
         t.end();
     }, 500);
-
 });
 
 test('eventListeners', function(t) {
@@ -165,4 +165,46 @@ test('eventListeners', function(t) {
 
     t.end();
 
+});
+
+test('virtual node properties', function(t) {
+
+    var props = {
+        className: 'props-container',
+        title: 'a title',
+        items: 3
+    };
+    var actual, expect;
+    var vnode = document.querySelector('#vnode-properties');
+    var patch = snabbdom.patch;
+    vnode = patch(vnode, snabbdom.virtualNodeProperties(props))
+
+    actual = vnode.sel;
+    expect = 'div#cool';
+    t.equal(actual, expect, 'selector value is "div#cool"');
+
+    actual = vnode.data.props;
+    expect = {
+        className: props.className
+    };
+    t.deepEqual(actual, expect, 'props are defined');
+
+
+    actual = vnode.children.length;
+    expect = 2;
+    t.equal(actual, expect, 'should have one children');
+
+    actual = vnode.children[0].text;
+    expect = 'a title';
+    t.equal(actual, expect, 'children text is defined');
+
+    actual = vnode.children[0].elm.innerHTML;
+    expect = 'a title';
+    t.equal(actual, expect, 'elm property');
+
+    actual = vnode.children[1].children[0].data.key;
+    expect = 0;
+    t.equal(actual, expect, 'li key is defined');
+
+    t.end();
 });

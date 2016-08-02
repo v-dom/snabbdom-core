@@ -129,7 +129,7 @@ module.exports = {
                         transition: 'opacity 1s',
                         remove: { opacity: '0' }
                     }
-                })
+                });
             }
         }
     },
@@ -137,11 +137,65 @@ module.exports = {
     evtlistener: function(clickHandler) {
         // The event listeners module gives powerful capabilities
         // for attaching event listeners.
-
         return h('div', [
             h('button', { on: { click: [clickHandler, 1] } }),
             h('button', { on: { click: [clickHandler, 2] } }),
             h('button', { on: { click: [clickHandler, 3] } })
+        ]);
+    },
+
+    virtualNodeProperties: function(props) {
+
+        // -------------
+        // sel: String
+        // -------------
+        // The .sel property of a virtual node is the CSS selector
+        // passed to h() during creation
+
+        // -------------
+        // data: Object
+        // -------------
+        // The .data property of a virtual node is the place to add information
+        // for modules to access and manipulate the real DOM element when it is created;
+        // Add styles, CSS classes, attributes, etc.
+
+        // -------------
+        // children : Array
+        // -------------
+        // The .children property of a virtual node is the third (optional)
+        // parameter to h() during creation. .children is simply an Array of virtual
+        // nodes that should be added as children of the parent DOM node upon creation.
+
+        // -------------
+        // text : String
+        // -------------
+        // The .text property is created when a virtual node is created
+        // with only a single child that possesses text and only requires
+        // document.createTextNode() to be used.
+
+        // ------------
+        // elm : Element
+        // ------------
+        // The .elm property of a virtual node is a pointer to the real DOM node
+        // created by snabbdom.
+        // This property is very useful to do calculations in hooks as well as modules.
+
+        // -----------
+        // key : string | number
+        // -----------
+        // The .key property is created when a key is provided inside of your
+        // .data object. The .key property is used to keep pointers to DOM nodes
+        // that existed previously to avoid recreating them if it is unnecessary
+
+        return h('div#cool', {
+            props: {
+                className: props.className
+            }
+        }, [h('h1', props.title),
+
+            h('ul', Array(props.items).fill(true).map(function(item, idx) {
+                return h('li', { key: idx }, 'item: ' + idx);
+            }))
         ]);
     }
 };
