@@ -15,6 +15,7 @@ before('description: snabdom core', function(t) {
                                                               <div id="with-hooks"></div>
                                                               <div id="module-class"></div>
                                                               <div id="module-props"></div>
+                                                              <div id="module-attrs"></div>
                                                            </div>`;
         t.end();
     });
@@ -97,3 +98,19 @@ test('propsModule', function(t) {
     t.equal(actual, expect, 'prop src is defined');
     t.end();
 });
+
+test('attrsModule', function(t) {
+    var vnode = document.querySelector('#module-attrs');
+    var patch = snabbdom.patch;
+
+    vnode = patch(vnode, snabbdom.modules.attrsModule({ a: 'a', b: 'b' }));
+
+    var actual = vnode.elm.getAttribute('src'),
+        expect = 'a';
+    t.equal(actual, expect, 'attr src is defined');
+    t.end();
+
+
+    console.log(document.querySelector('#container').innerHTML)
+});
+

@@ -11,7 +11,8 @@ module.exports = {
     // function that uses the specified set of modules.
     patch: snabbdom.init([
         require('snabbdom/modules/class'), // makes it easy to toggle classes,
-        require('snabbdom/modules/props') // for setting properties on DOM elements
+        require('snabbdom/modules/props'), // for setting properties on DOM elements
+        require('snabbdom/modules/attributes')
     ]),
 
 
@@ -96,6 +97,11 @@ module.exports = {
         propsModule: function(props) {
             // Allows you to set properties on DOM elements.
             return h('img', { props: { src: props.a, alt: props.b } });
+        },
+
+        attrsModule: function(att){
+          // Same as props, but set attributes instead of properties on DOM elements.
+          return h('img', { attrs: { src: att.a, alt: att.b } });
         }
     }
 };
