@@ -109,7 +109,14 @@ module.exports = {
             style: function(styles) {
                 // The style module is for making your HTML look slick and animate smoothly.
                 // At its core it allows you to set CSS properties on elements.
-                return h('div', { key: 5, style: styles });
+                return h('div', { style: styles });
+            },
+
+            delayedProperties: function() {
+                // You can specify properties as being delayed.
+                // Whenever these properties change,
+                // the change is not applied until after the next frame.
+                return h('div', { style: { opacity: '0', transition: 'opacity .5s', delayed: { opacity: '1' } } });
             }
         }
     }

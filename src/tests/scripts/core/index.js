@@ -17,6 +17,7 @@ before('description: snabdom core', function(t) {
                                                               <div id="module-props"></div>
                                                               <div id="module-attrs"></div>
                                                               <div id="module-styles-style"></div>
+                                                              <div id="module-styles-delayed-props"></div>
                                                            </div>`;
         t.end();
     });
@@ -126,6 +127,20 @@ test('styleModule: style', function(t) {
         expect = 'color: rgb(0, 255, 204); font-size: 35px;';
     t.equal(actual, expect, 'style is defined');
     t.end();
+});
 
-    // console.log(document.querySelector('#container').innerHTML)
+test('styleModule: delayed properties', function(t) {
+
+    var vnode = document.querySelector('#module-styles-delayed-props');
+    var patch = snabbdom.patch;
+
+    vnode = patch(vnode, snabbdom.modules.styleModules.delayedProperties());
+
+    setTimeout(function() {
+        var actual = vnode.elm.getAttribute('style'),
+            expect = 'opacity: 1;';
+        t.equal(actual, expect, 'style opacity with delay');
+        t.end();
+    }, 500);
+
 });
