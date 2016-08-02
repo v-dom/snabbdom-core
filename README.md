@@ -1,7 +1,5 @@
-# snabdom
-snabdom core studies
-
-
+# Snabbdom (studies)
+snabbdom core studies
 
 ## Clone the repo & install
 ```
