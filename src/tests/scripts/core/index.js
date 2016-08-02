@@ -21,10 +21,6 @@ before('description: snabdom core', function(t) {
 });
 
 test('init', function(t) {
-    // The core exposes only one single function snabbdom.init.
-    // This init takes a list of modules and returns a patch
-    // function that uses the specified set of modules.
-
     var actual = typeof snabbdom.patch,
         expect = 'function';
     t.equal(actual, expect, 'returns a `patch` function');
@@ -32,10 +28,6 @@ test('init', function(t) {
 });
 
 test('h', function(t) {
-    // It is recommended that you use snabbdom/h
-    // to create vnodes. h accepts a tag/selector as a string,
-    // an optional data object and an optional string or array of children.
-
     var actual = typeof snabbdom.H,
         expect = 'object';
     t.equal(actual, expect, 'snabbdom `h` object');
@@ -43,11 +35,7 @@ test('h', function(t) {
 });
 
 test('patch', function(t) {
-    // The patch function returned by init takes two arguments.
-    // The first is a DOM element or a vnode representing the current view.
-    // The second is a vnode representing the new, updated view.
     var domElm = document.querySelector('#placeholder');
-
     var actual = snabbdom.doPatch(domElm).elm.innerHTML,
         expect = 'Hello Snabbdom';
     t.equal(actual, expect, 'was replaced by the created DOM');

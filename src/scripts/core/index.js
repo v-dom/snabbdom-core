@@ -6,16 +6,26 @@ var h = require('snabbdom/h');
 
 module.exports = {
 
+    // The core exposes only one single function snabbdom.init.
+    // This init takes a list of modules and returns a patch
+    // function that uses the specified set of modules.
     patch: snabbdom.init([
         require('snabbdom/modules/class'), // makes it easy to toggle classes,
         require('snabbdom/modules/props') // for setting properties on DOM elements
     ]),
 
+
+    // It is recommended that you use snabbdom/h
+    // to create vnodes. h accepts a tag/selector as a string,
+    // an optional data object and an optional string or array of children.
     H: h('div.hello-snabbdom', {
         style: { color: '#000' }
     }, 'hello again'),
 
     doPatch: function(vnode) {
+        // The patch function returned by init takes two arguments.
+        // The first is a DOM element or a vnode representing the current view.
+        // The second is a vnode representing the new, updated view.
         var newVnode = h('div', 'Hello Snabbdom');
         var patch = snabbdom.init([]);
         return patch(vnode, newVnode);
