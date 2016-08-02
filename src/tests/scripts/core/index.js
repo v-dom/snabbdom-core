@@ -16,6 +16,7 @@ before('description: snabdom core', function(t) {
                                                               <div id="module-class"></div>
                                                               <div id="module-props"></div>
                                                               <div id="module-attrs"></div>
+                                                              <div id="module-styles-style"></div>
                                                            </div>`;
         t.end();
     });
@@ -109,8 +110,22 @@ test('attrsModule', function(t) {
         expect = 'a';
     t.equal(actual, expect, 'attr src is defined');
     t.end();
-
-
-    console.log(document.querySelector('#container').innerHTML)
 });
 
+test('styleModule: style', function(t) {
+
+    var vnode = document.querySelector('#module-styles-style');
+    var patch = snabbdom.patch;
+
+    vnode = patch(vnode, snabbdom.modules.styleModules.style({
+        color: '#00FFCC',
+        fontSize: '35px'
+    }));
+
+    var actual = vnode.elm.getAttribute('style'),
+        expect = 'color: rgb(0, 255, 204); font-size: 35px;';
+    t.equal(actual, expect, 'style is defined');
+    t.end();
+
+    // console.log(document.querySelector('#container').innerHTML)
+});
